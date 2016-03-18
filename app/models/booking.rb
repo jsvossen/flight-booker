@@ -1,6 +1,6 @@
 class Booking < ActiveRecord::Base
 
-	belongs_to :passenger
+	has_many :passengers
 	belongs_to :flight
 
 end

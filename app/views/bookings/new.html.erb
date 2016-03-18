@@ -19,6 +19,17 @@
 
 	<%= form_for @booking do |f| %>
 		<%= f.hidden_field :flight_id, value: @booking.flight_id %>
+		<% @num.times do |n| %>
+			<div class="form-group">
+				<% if @num > 1 %><p><strong>Passenger <%= n+1 %></strong></p><% end %>
+				<%= f.fields_for :passengers do |p| %>
+					<%= p.label :name %>
+					<%= p.text_field :name, class: "form-control" %>
+					<%= p.label :email %>
+					<%= p.email_field :email, class: "form-control" %>
+				<% end %>
+			</div>
+		<% end %>
 		<%= f.submit "Book Flight", class: "btn btn-primary" %>
 	<% end %>
 

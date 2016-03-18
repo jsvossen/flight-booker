@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
 			redirect_to flights_path and return
 		else
 			@num = params[:booking][:num_tickets].to_i
-			@booking = Booking.new
+			@booking = Booking.new(booking_params)
 			@num.times { @booking.passengers.build }
 		end
 	end
