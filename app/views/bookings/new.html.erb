@@ -15,20 +15,18 @@
 </div>
 
 <div class="col-md-8">
-	<h2>Passenger Information:</h2>
+	<h2>Traveler Information:</h2>
 
 	<%= form_for @booking do |f| %>
 		<%= f.hidden_field :flight_id, value: @booking.flight_id %>
-		<% @num.times do |n| %>
-			<div class="form-group">
-				<% if @num > 1 %><p><strong>Passenger <%= n+1 %></strong></p><% end %>
-				<%= f.fields_for :passengers do |p| %>
-					<%= p.label :name %>
-					<%= p.text_field :name, class: "form-control" %>
-					<%= p.label :email %>
-					<%= p.email_field :email, class: "form-control" %>
-				<% end %>
-			</div>
+		<% @booking.passengers.each_with_index do |passenger, i| %>
+			<%= f.fields_for :passengers, index: passenger.id do |p| %>
+				<div class="form-group form-inline">
+					<% if @booking.passengers.size > 1 %><label>Passenger <%= i+1 %>:</label><br><% end %>
+					<%= p.text_field :name, placeholder: "Name", class: "form-control" %>
+					<%= p.email_field :email, placeholder: "Email", class: "form-control" %>
+				</div>
+			<% end %>
 		<% end %>
 		<%= f.submit "Book Flight", class: "btn btn-primary" %>
 	<% end %>
