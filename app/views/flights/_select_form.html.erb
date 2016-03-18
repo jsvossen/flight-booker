@@ -1,0 +1,21 @@
+<p>Booking for <%= pluralize(params[:num_tickets], "passenger", "passengers") %>.</p>
+<%= form_for @booking, url: new_booking_path, method: "get", :html => {class: "flight-select"} do |f| %>
+	<div class="list-group">
+		<% @flights.each do |flight| %>
+			<div class="list-group-item">
+
+				<%= f.radio_button :flight_id, flight.id %>
+				<%= f.label "flight_id_#{flight.id}" do %>
+					<%= flight.from_airport.code %> => <%= flight.to_airport.code %><br>
+					<%= flight.date_formatted_full %>
+				<% end %>
+
+			</div>
+		<% end %>
+	</div>
+
+	<%= f.hidden_field :num_tickets, value: params[:num_tickets] %>
+	<div class="form-group">
+		<%= f.submit "Continue >>", class: "btn btn-primary" %>
+	</div>
+<% end %>

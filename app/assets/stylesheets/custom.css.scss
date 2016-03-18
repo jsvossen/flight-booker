@@ -20,6 +20,9 @@ h2:first-child, h3:first-child { margin-top: 0; }
 	padding: 6px 0;
 }
 
+.jumbotron h1 .glyphicon { font-size: 50px; }
+.jumbotron h1 { margin-top: 2px;}
+
 
 .flight-select label {
 	font-weight: normal;
@@ -37,3 +40,5 @@ h2:first-child, h3:first-child { margin-top: 0; }
 .flight-select input[type=radio]:checked + label { font-weight: bold; }
 
 .flight-select div.list-group-item:hover { background: #f5f5f5 !important; }
+
+footer { clear: both; }
