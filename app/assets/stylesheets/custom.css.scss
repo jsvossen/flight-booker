@@ -1,2 +1,21 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.container { position: relative; }
+
+h2:first-child, h3:first-child { margin-top: 0; }
+
+#logo { 
+	font-weight: bold;
+	color: #fff;
+	font-size: 28px;
+	margin-top: 3px;
+}
+
+.logo-icon { 
+	color: #ccc;
+	font-size: 45px;
+	float:left;
+	margin-right: 10px;
+	padding: 6px 0;
+}

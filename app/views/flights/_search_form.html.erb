@@ -1,0 +1,35 @@
+<%= form_tag(flights_path, method: :get ) do %>
+	<div class="row">
+		<div class="form-group col-md-6">
+			<%= label_tag :from_airport, "From" %>
+			<%= select_tag :from_airport, 
+					options_from_collection_for_select(
+						Airport.all.order(:code),:id,:code, 
+						selected: params[:from_airport]), 
+						class: "form-control" %>
+		</div>
+		<div class="form-group col-md-6">
+		<%= label_tag :to_airport, "To" %>
+		<%= select_tag :to_airport, 
+				options_from_collection_for_select(
+					Airport.all.order(code: :desc),:id,:code,
+					selected: params[:to_airport]), 
+					class: "form-control"%>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-md-6">
+		<%= label_tag :departure, "Departure Date" %>
+		<%= select_tag :departure, 
+			options_for_select(Flight.all.group_by(&:date_short).keys.sort, selected: params[:departure]),
+			class: "form-control" %>
+		</div>
+		<div class="form-group col-md-6">
+		<%= label_tag :num_tickets, "# of Tickets" %>
+		<%= select_tag :num_tickets, 
+			options_for_select((1..4).to_a, selected: params[:num_tickets]),
+			class: "form-control" %>
+		</div>
+	</div>
+	<%= submit_tag "Search", class: "btn btn-default" %>
+<% end %>

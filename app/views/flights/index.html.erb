@@ -1,31 +1,25 @@
-<h1>Search for a Flight</h1>
-
-<%= form_tag(flights_path, method: :get ) do %>
-	<%= label_tag :from_airport, "From" %>
-	<%= select_tag :from_airport, options_from_collection_for_select(Airport.all.order(:code),:id,:code) %>
-	<%= label_tag :to_airport, "To" %>
-	<%= select_tag :to_airport, options_from_collection_for_select(Airport.all.order(code: :desc),:id,:code) %>
-	<br>
-	<%= label_tag :departure, "Departure Date" %>
-	<%= select_tag :departure, 
-		options_for_select(Flight.all.group_by(&:date_short).keys.sort) %>
-	<br>
-	<%= label_tag :passengers, "Number of Passengers" %>
-	<%= select_tag :passengers, 
-		options_for_select((1..4).to_a) %>
-	<br>
-	<%= submit_tag "Search" %>
-<% end %>
-
-<br><br>
-	
-<% if @flights && @flights.any? %>	
-	<div class="list-group">
-	<% @flights.each do |f| %>
-		<div class="list-group-item">
-			<%= f.from_airport.code %> => <%= f.to_airport.code %><br>
-			<%= f.date_formatted_full %>
+<div class="col-md-4">
+	<div class="panel panel-info">
+		<div class="panel-body bg-info">
+			<h3>Search for a Flight</h3>
+			<%= render "flights/search_form" %>
 		</div>
-	<% end %>
 	</div>
-<% end %>
+</div>
+<div class="col-md-8">
+	<% if @flights %>
+		<% if @flights.any?	%>
+			<h2>Select a Flight:</h2>
+			<div class="list-group">
+			<% @flights.each do |f| %>
+				<div class="list-group-item">
+					<%= f.from_airport.code %> => <%= f.to_airport.code %><br>
+					<%= f.date_formatted_full %>
+				</div>
+			<% end %>
+			</div>
+		<% else %>
+			<p>No flights found. Try a difference search.</p>
+		<% end %>
+	<% end %>
+</div>
