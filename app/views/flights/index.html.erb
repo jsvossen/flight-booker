@@ -9,15 +9,28 @@
 <div class="col-md-8">
 	<% if @flights %>
 		<% if @flights.any?	%>
+
 			<h2>Select a Flight:</h2>
-			<div class="list-group">
-			<% @flights.each do |f| %>
-				<div class="list-group-item">
-					<%= f.from_airport.code %> => <%= f.to_airport.code %><br>
-					<%= f.date_formatted_full %>
+
+			<%= form_for @booking do |f| %>
+				<div class="list-group">
+					<% @flights.each do |flight| %>
+						<div class="list-group-item">
+
+							<%= f.radio_button :flight_id, flight.id %>
+							<%= f.label "flight_id_#{flight.id}" do %>
+								<%= flight.from_airport.code %> => <%= flight.to_airport.code %><br>
+								<%= flight.date_formatted_full %>
+							<% end %>
+
+						</div>
+					<% end %>
 				</div>
+
+				<%= f.hidden_field :num_tickets, value: params[:num_tickets] %>
+				<%= f.submit "Continue >>", class: "btn btn-primary" %>
 			<% end %>
-			</div>
+
 		<% else %>
 			<p>No flights found. Try a difference search.</p>
 		<% end %>
