@@ -1,6 +1,7 @@
 class Flight < ActiveRecord::Base
 
 	scope :by_date, -> { order(:departure) }
+	scope :on_day, -> (day) { where("departure >= '#{day.to_time.beginning_of_day}' AND departure <= '#{day.to_time.end_of_day}'") }	
 
 	belongs_to :to_airport, class_name: "Airport"
 	belongs_to :from_airport, class_name: "Airport"

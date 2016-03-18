@@ -19,7 +19,7 @@
 
 <br><br>
 	
-<% if @flights.any? %>	
+<% if @flights && @flights.any? %>	
 	<div class="list-group">
 	<% @flights.each do |f| %>
 		<div class="list-group-item">

@@ -11,8 +11,6 @@ Airport.delete_all
 Airport.create!(code: "SFO")
 Airport.create!(code: "PDX")
 Airport.create!(code: "DEN")
-Airport.create!(code: "NYC")
-Airport.create!(code: "SMF")
 Airport.create!(code: "IAD")
 
 Flight.delete_all
@@ -22,7 +20,7 @@ def time_rand from = 0.0, to = Time.now
   Time.at(from + rand * (to.to_f - from.to_f))
 end
 
-20.times do |n|
+100.times do |n|
 	airports = Airport.all.sample(2)
 	departs = time_rand(Time.now, Time.local(2016,04,01))
 	duration = rand(1.0..8.0).round(2)
