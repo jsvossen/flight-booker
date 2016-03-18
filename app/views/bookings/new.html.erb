@@ -1,0 +1,25 @@
+<div class="col-md-4">
+	<div class="panel panel-info">
+		<div class="panel-body bg-info">
+			<h3>Trip Details:</h3>
+			<p><%= @booking.flight.from_airport.code %> => <%= @booking.flight.to_airport.code %><br>
+			<%= @booking.flight.date_formatted_full %><br>
+			Passengers: <%= @num %></p>
+			<hr>
+			<%= link_to "< Back to Search", flights_path( to_airport: @booking.flight.to_airport.id,
+														from_airport: @booking.flight.from_airport.id,
+														departure: @booking.flight.date_short,
+														num_tickets: @num ) %>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-8">
+	<h2>Passenger Information:</h2>
+
+	<%= form_for @booking do |f| %>
+		<%= f.hidden_field :flight_id, value: @booking.flight_id %>
+		<%= f.submit "Book Flight", class: "btn btn-primary" %>
+	<% end %>
+
+</div>
