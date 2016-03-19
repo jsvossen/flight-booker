@@ -1,0 +1,23 @@
+<div class="col-md-4">
+	<div class="panel panel-info">
+		<div class="panel-body bg-info">
+			<h3>Search for a Flight</h3>
+			<%= render "flights/search_form" %>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-8">
+	<h2>Reservation Completed!</h2>
+	<p>Thank you for booking with ACME Travel Company. Enjoy your flight!</p>
+
+	<h3>Trip Details:</h3>
+	<p><%= @booking.flight.from_airport.code %> => <%= @booking.flight.to_airport.code %></p>
+	<p>Departure: <%= @booking.flight.date_formatted_full %></p>
+	<p>Duration: <%= @booking.flight.duration %></p>
+
+	<h3><%= @booking.passengers.count > 1 ? "Passengers" : "Passenger" %>:</h3>
+	<% @booking.passengers.each do |p| %>
+		<p><%= p.name %>, <%= p.email %></p>
+	<% end %>
+</div>

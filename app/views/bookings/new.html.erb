@@ -20,7 +20,7 @@
 	<%= form_for @booking do |f| %>
 		<%= f.hidden_field :flight_id, value: @booking.flight_id %>
 		<% @booking.passengers.each_with_index do |passenger, i| %>
-			<%= f.fields_for :passengers, index: passenger.id do |p| %>
+			<%= f.fields_for :passengers_attributes, index: i do |p| %>
 				<div class="form-group form-inline">
 					<% if @booking.passengers.size > 1 %><label>Passenger <%= i+1 %>:</label><br><% end %>
 					<%= p.text_field :name, placeholder: "Name", class: "form-control" %>

@@ -13,13 +13,24 @@ class BookingsController < ApplicationController
 
 	def create
 		@booking = Booking.new(booking_params)
+		if @booking.save
+			flash[:success] = "Booking successful!"
+			redirect_to @booking
+		else
+			flash.now[:danger] = "Error: #{@booking.errors.full_messages.join('. ')}."
+			render :new
+		end
+	end
+
+	def show
+		@booking = Booking.find(params[:id])
 	end
 
 
 	private
 
 		def booking_params
-			params.require(:booking).permit(:flight_id, :passengers)
+			params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])
 		end
 
 end
