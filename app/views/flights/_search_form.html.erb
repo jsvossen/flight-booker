@@ -22,6 +22,7 @@
 		<%= label_tag :departure, "Departure Date" %>
 		<%= select_tag :departure, 
 			options_for_select(Flight.all.group_by(&:date_short).keys.sort, selected: params[:departure]),
+			prompt: "- Any -",
 			class: "form-control" %>
 		</div>
 		<div class="form-group col-md-6">
