@@ -14,7 +14,7 @@
 	<h3>Trip Details:</h3>
 	<p><%= @booking.flight.from_airport.code %> => <%= @booking.flight.to_airport.code %></p>
 	<p>Departure: <%= @booking.flight.date_formatted_full %></p>
-	<p>Duration: <%= @booking.flight.duration %></p>
+	<p>Duration: <%= @booking.flight.duration %> hrs</p>
 
 	<h3><%= @booking.passengers.count > 1 ? "Passengers" : "Passenger" %>:</h3>
 	<% @booking.passengers.each do |p| %>
